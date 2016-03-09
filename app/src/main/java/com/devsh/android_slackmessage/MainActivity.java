@@ -2,6 +2,7 @@ package com.devsh.android_slackmessage;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.devsh.libslackmessage.SlackAttachment;
 import com.devsh.libslackmessage.SlackMessage;
@@ -10,9 +11,14 @@ import com.devsh.libslackmessage.SlackReporter;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
 
     private String apiKey = "T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh";
+    private String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +48,17 @@ public class MainActivity extends AppCompatActivity {
                 .attachements(attachmentList);
 
         SlackReporter.create(apiKey).report(slackMessage);
+
+        SlackReporter.create(apiKey).report(slackMessage, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i(TAG, response.body());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, t.toString());
+            }
+        });
     }
 }
