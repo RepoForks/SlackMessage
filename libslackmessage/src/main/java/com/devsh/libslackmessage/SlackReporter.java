@@ -71,6 +71,11 @@ public class SlackReporter {
         });
     }
 
+    public void report(SlackMessage slackMessage, Callback<String> response) {
+        Call<String> report = sService.sendReport(mApiKey, slackMessage);
+        report.enqueue(response);
+    }
+
     public String reportSync(SlackMessage slackMessage) throws IOException {
         Call<String> report = sService.sendReport(mApiKey, slackMessage);
         return report.execute().body();
