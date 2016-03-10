@@ -1,5 +1,5 @@
 # SlackMessage
-Slack Message Sender Library for Android
+Slack Message Sender Library for Android and Java
 
 # How to Use
 
