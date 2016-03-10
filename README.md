@@ -3,7 +3,21 @@ Slack Message Sender Library for Android
 
 # How to Use
 
-## 0. Requirements
+## Download
+```xml
+<dependency>
+  <groupId>com.devsh.suhanlee</groupId>
+  <artifactId>slack-message</artifactId>
+  <version>0.1.1</version>
+  <type>pom</type>
+</dependency>
+```
+or Gradle
+
+```java
+compile 'com.devsh.suhanlee:slack-message:0.1.1'
+```
+
 - Android Permission
 
 ```java
