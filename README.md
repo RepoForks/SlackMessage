@@ -18,12 +18,6 @@ or Gradle
 compile 'com.devsh.suhanlee:slack-message:0.1.1'
 ```
 
-- Android Permission
-
-```java
-    <uses-permission android:name="android.permission.INTERNET" />
-```
-
 - Get Slack WebHook API Key : https://api.slack.com
 
 ## 1. Make SlackMessage
