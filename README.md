@@ -24,9 +24,10 @@ ex) T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh
 ## Code
 ### 1. Make SlackMessage
 ```java
-        List<SlackAttachment> attachmentList = new ArrayList<SlackAttachment>();
+      List<SlackAttachment> attachmentList = new ArrayList<>();
 
-        SlackAttachment attachment = new SlackAttachment()
+        // Option - attachment
+        SlackAttachment attachment = SlackAttachment.create()
                 .fallback("Required plain-text summary of the attachment.")
                 .color("#36a64f")
                 .pretext("Optional text that appears above the attachment block")
@@ -41,6 +42,7 @@ ex) T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh
 
         attachmentList.add(attachment);
 
+        // SlackMessage
         SlackMessage slackMessage = SlackMessage.create()
                 .username("Hi, Im suhanlee")
                 .iconEmoji(":ghost")
@@ -52,9 +54,10 @@ ex) T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh
     private String apiKey = "T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh"; // example
 ...
 ...
-        // if you do not need check response,
+        // when it no need response
         SlackReporter.create(apiKey).report(slackMessage);
-        // if you need check response,
+
+        // when it need handle response
         SlackReporter.create(apiKey).report(slackMessage, new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -71,57 +74,45 @@ ex) T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh
 - Slack Message
 ```java
     @MediumTest
-    public void testSlackMessage() {
+    public void testSlackMessage() throws IOException {
         SlackMessage slackMessage = SlackMessage.create()
                 .username("Hi, Im suhanlee")
                 .iconEmoji(":ghost:")
                 .text("BOO!");
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 
     @MediumTest
-    public void testChannelOverride() {
+    public void testChannelOverride() throws IOException {
         SlackMessage slackMessage = SlackMessage.create()
                 .username("Hi, Im suhanlee")
                 .iconEmoji(":ghost:")
                 .text("BOO!")
                 .channel("#testchannel");
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 
     @MediumTest
-    public void testImageUrl() {
+    public void testImageUrl() throws IOException {
         SlackMessage slackMessage = SlackMessage.create()
                 .username("Hi, Im suhanlee")
                 .text("BOO!")
                 .channel("#testchannel")
                 .iconUrl("https://avatars0.githubusercontent.com/u/2666166?v=3&s=460");
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 ```
 - Slack Attachments
 ```java
     @MediumTest
-    public void testSlackAttachments() {
-        List<SlackAttachment> attachmentList = new ArrayList<SlackAttachment>();
+    public void testSlackAttachments() throws IOException {
+        List<SlackAttachment> attachmentList = new ArrayList<>();
 
         SlackAttachment attachment = SlackAttachment.create()
                 .fallback("Required plain-text summary of the attachment.")
@@ -140,18 +131,13 @@ ex) T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh
 
         SlackMessage slackMessage = SlackMessage.create().attachements(attachmentList);
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 
     @MediumTest
-    public void testExampleGroove() {
-        List<SlackAttachment> attachmentList = new ArrayList<SlackAttachment>();
+    public void testExampleGroove() throws IOException {
+        List<SlackAttachment> attachmentList = new ArrayList<>();
 
         SlackAttachment attachment = SlackAttachment.create()
                 .fallback("New ticket from Andrea Lee - Ticket #1943: Can't rest my password - https://groove.hq/path/to/ticket/194")
@@ -165,17 +151,13 @@ ex) T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh
 
         SlackMessage slackMessage = SlackMessage.create().attachements(attachmentList);
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 
     @MediumTest
-    public void testExampleHoneybadger() {
-        List<SlackAttachment> attachmentList = new ArrayList<SlackAttachment>();
+    public void testExampleHoneybadger() throws IOException {
+        List<SlackAttachment> attachmentList = new ArrayList<>();
 
         SlackAttachment attachment = SlackAttachment.create()
                 .fallback("ReferenceError - UI is not defined: https://honeybadger.io/path/to/event/")
@@ -186,17 +168,14 @@ ex) T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh
 
         SlackMessage slackMessage = SlackMessage.create().attachements(attachmentList);
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
+
     }
 
     @MediumTest
-    public void testExampleDatadog() {
-        List<SlackAttachment> attachmentList = new ArrayList<SlackAttachment>();
+    public void testExampleDatadog() throws IOException {
+        List<SlackAttachment> attachmentList = new ArrayList<>();
 
         SlackAttachment attachment = SlackAttachment.create()
                 .fallback("Network traffic (kb/s): How does this look? @slack-ops - Sent by Julie Dodd - https://datadog.com/path/to/event")
@@ -210,11 +189,7 @@ ex) T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh
 
         SlackMessage slackMessage = SlackMessage.create().attachements(attachmentList);
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 ```
