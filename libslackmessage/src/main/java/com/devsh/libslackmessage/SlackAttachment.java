@@ -36,6 +36,8 @@ public class SlackAttachment {
         return new SlackAttachment();
     }
 
+    private SlackAttachment() {}
+
     public SlackAttachment fallback(String fallback) {
         this.fallback = fallback;
         return this;

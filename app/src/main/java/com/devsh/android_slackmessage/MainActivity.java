@@ -25,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<SlackAttachment> attachmentList = new ArrayList<SlackAttachment>();
+        List<SlackAttachment> attachmentList = new ArrayList<>();
 
-        SlackAttachment attachment = new SlackAttachment()
+        // Option - attachment
+        SlackAttachment attachment = SlackAttachment.create()
                 .fallback("Required plain-text summary of the attachment.")
                 .color("#36a64f")
                 .pretext("Optional text that appears above the attachment block")
@@ -42,13 +43,16 @@ public class MainActivity extends AppCompatActivity {
 
         attachmentList.add(attachment);
 
+        // SlackMessage
         SlackMessage slackMessage = SlackMessage.create()
                 .username("Hi, Im suhanlee")
                 .iconEmoji(":ghost")
                 .attachements(attachmentList);
 
+        // when it no need response
         SlackReporter.create(apiKey).report(slackMessage);
 
+        // when it need handle response
         SlackReporter.create(apiKey).report(slackMessage, new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
