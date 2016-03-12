@@ -8,7 +8,7 @@ Slack Message Sender Library for Android and Java
 <dependency>
   <groupId>com.devsh.suhanlee</groupId>
   <artifactId>slack-message</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <type>pom</type>
 </dependency>
 ```
