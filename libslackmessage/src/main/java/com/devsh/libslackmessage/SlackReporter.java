@@ -28,6 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class SlackReporter {
     private final static String TAG = "ReportManager";
@@ -50,6 +51,7 @@ public class SlackReporter {
 
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.baseUrl("https://hooks.slack.com")
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create());
 
         if (mIsLogEnabled) {

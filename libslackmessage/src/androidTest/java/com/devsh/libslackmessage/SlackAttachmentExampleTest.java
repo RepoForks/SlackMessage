@@ -19,10 +19,10 @@ public class SlackAttachmentExampleTest extends ApplicationTestCase<Application>
     }
 
     @MediumTest
-    public void testSlackAttachments() {
-        List<SlackAttachment> attachmentList = new ArrayList<SlackAttachment>();
+    public void testSlackAttachments() throws IOException {
+        List<SlackAttachment> attachmentList = new ArrayList<>();
 
-        SlackAttachment attachment = new SlackAttachment()
+        SlackAttachment attachment = SlackAttachment.create()
                 .fallback("Required plain-text summary of the attachment.")
                 .color("#36a64f")
                 .pretext("Optional text that appears above the attachment block")
@@ -39,20 +39,15 @@ public class SlackAttachmentExampleTest extends ApplicationTestCase<Application>
 
         SlackMessage slackMessage = SlackMessage.create().attachements(attachmentList);
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 
     @MediumTest
-    public void testExampleGroove() {
-        List<SlackAttachment> attachmentList = new ArrayList<SlackAttachment>();
+    public void testExampleGroove() throws IOException {
+        List<SlackAttachment> attachmentList = new ArrayList<>();
 
-        SlackAttachment attachment = new SlackAttachment()
+        SlackAttachment attachment = SlackAttachment.create()
                 .fallback("New ticket from Andrea Lee - Ticket #1943: Can't rest my password - https://groove.hq/path/to/ticket/194")
                 .pretext("New ticket from Andrea Lee")
                 .title("Ticket #1943: Can't reset my password")
@@ -64,19 +59,15 @@ public class SlackAttachmentExampleTest extends ApplicationTestCase<Application>
 
         SlackMessage slackMessage = SlackMessage.create().attachements(attachmentList);
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 
     @MediumTest
-    public void testExampleHoneybadger() {
-        List<SlackAttachment> attachmentList = new ArrayList<SlackAttachment>();
+    public void testExampleHoneybadger() throws IOException {
+        List<SlackAttachment> attachmentList = new ArrayList<>();
 
-        SlackAttachment attachment = new SlackAttachment()
+        SlackAttachment attachment = SlackAttachment.create()
                 .fallback("ReferenceError - UI is not defined: https://honeybadger.io/path/to/event/")
                 .text("<https://honeybadger.io/path/to/event/|ReferenceError> - UI is not defined")
                 .color("#F35A00");
@@ -85,19 +76,16 @@ public class SlackAttachmentExampleTest extends ApplicationTestCase<Application>
 
         SlackMessage slackMessage = SlackMessage.create().attachements(attachmentList);
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
+
     }
 
     @MediumTest
-    public void testExampleDatadog() {
-        List<SlackAttachment> attachmentList = new ArrayList<SlackAttachment>();
+    public void testExampleDatadog() throws IOException {
+        List<SlackAttachment> attachmentList = new ArrayList<>();
 
-        SlackAttachment attachment = new SlackAttachment()
+        SlackAttachment attachment = SlackAttachment.create()
                 .fallback("Network traffic (kb/s): How does this look? @slack-ops - Sent by Julie Dodd - https://datadog.com/path/to/event")
                 .title("Network traffic (kb/s)")
                 .titleLink("https://datadog.com/path/to/event")
@@ -109,11 +97,7 @@ public class SlackAttachmentExampleTest extends ApplicationTestCase<Application>
 
         SlackMessage slackMessage = SlackMessage.create().attachements(attachmentList);
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 }

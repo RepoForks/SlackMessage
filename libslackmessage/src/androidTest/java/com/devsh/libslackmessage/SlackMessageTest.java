@@ -31,49 +31,37 @@ public class SlackMessageTest extends ApplicationTestCase<Application> {
     }
 
     @MediumTest
-    public void testSlackMessage() {
+    public void testSlackMessage() throws IOException {
         SlackMessage slackMessage = SlackMessage.create()
                 .username("Hi, Im suhanlee")
                 .iconEmoji(":ghost:")
                 .text("BOO!");
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 
     @MediumTest
-    public void testChannelOverride() {
+    public void testChannelOverride() throws IOException {
         SlackMessage slackMessage = SlackMessage.create()
                 .username("Hi, Im suhanlee")
                 .iconEmoji(":ghost:")
                 .text("BOO!")
                 .channel("#testchannel");
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 
     @MediumTest
-    public void testImageUrl() {
+    public void testImageUrl() throws IOException {
         SlackMessage slackMessage = SlackMessage.create()
                 .username("Hi, Im suhanlee")
                 .text("BOO!")
                 .channel("#testchannel")
                 .iconUrl("https://avatars0.githubusercontent.com/u/2666166?v=3&s=460");
 
-        try {
-            String body = SlackReporter.create(apiKey).reportSync(slackMessage);
-            assertEquals("ok", body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String body = SlackReporter.create(apiKey).reportSync(slackMessage);
+        assertEquals("ok", body);
     }
 }
