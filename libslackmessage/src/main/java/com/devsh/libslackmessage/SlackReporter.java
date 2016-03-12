@@ -32,27 +32,34 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SlackReporter {
     private final static String TAG = "ReportManager";
 
-    private static Retrofit sRetrofit;
     private static SlackMessageReportService sService;
+    private static boolean mIsLogEnabled;
     private final String mApiKey;
 
     public static SlackReporter create(String apiKey) {
-        return new SlackReporter(apiKey);
+        return new SlackReporter(apiKey, false);
     }
 
-    private SlackReporter(String apiKey) {
+    public static SlackReporter create(String apiKey, boolean logEnabled) {
+        return new SlackReporter(apiKey, logEnabled);
+    }
+
+    private SlackReporter(String apiKey, boolean logEnabled) {
+        mIsLogEnabled = logEnabled;
         mApiKey = apiKey;
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        Retrofit.Builder builder = new Retrofit.Builder();
+        builder.baseUrl("https://hooks.slack.com")
+                .addConverterFactory(GsonConverterFactory.create());
 
-        sRetrofit = new Retrofit.Builder()
-                .baseUrl("https://hooks.slack.com")
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        if (mIsLogEnabled) {
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+            builder.client(client);
+        }
 
+        Retrofit sRetrofit = builder.build();
         sService = sRetrofit.create(SlackMessageReportService.class);
     }
 
@@ -61,12 +68,16 @@ public class SlackReporter {
         report.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.d(TAG, "onSuccess");
+                if (mIsLogEnabled) {
+                    Log.d(TAG, "onSuccess");
+                }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.d(TAG, "onFailure");
+                if (mIsLogEnabled) {
+                    Log.d(TAG, "onFailure");
+                }
             }
         });
     }
