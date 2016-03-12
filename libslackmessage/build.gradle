@@ -46,7 +46,7 @@ publish {
     userOrg = 'suhanlee'
     groupId = 'com.devsh.suhanlee'
     artifactId = 'slack-message'
-    publishVersion = '0.1.1'
+    publishVersion = '0.1.2'
     desc = 'SlackMessage Library for Android - It was inspired by Slack WebHooks API'
     website = 'https://github.com/suhanlee/SlackMessage'
     issueTracker = "${website}/issues"
