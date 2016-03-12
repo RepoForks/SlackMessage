@@ -18,7 +18,9 @@ or Gradle
 compile 'com.devsh.suhanlee:slack-message:0.1.1'
 ```
 
-- Get Slack WebHook API Key : https://api.slack.com
+- Get API-KEY refer to Slack Incoming Webhooks(https://api.slack.com/incoming-webhooks)
+
+ex) T0DJ86CLB/B0Q8V7ET0/74M6oWZIbxPcyAwK3fhxjfLh
 
 ## 1. Make SlackMessage
 ```java
