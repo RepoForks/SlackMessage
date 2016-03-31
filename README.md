@@ -8,14 +8,14 @@ Slack Message Sender Library for Android and Java
 <dependency>
   <groupId>com.devsh.suhanlee</groupId>
   <artifactId>slack-message</artifactId>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
   <type>pom</type>
 </dependency>
 ```
 or Gradle
 
 ```java
-compile 'com.devsh.suhanlee:slack-message:0.1.2'
+compile 'com.devsh.suhanlee:slack-message:0.1.3'
 ```
 
 - Get API-KEY refer to Slack Incoming Webhooks(https://api.slack.com/incoming-webhooks)
