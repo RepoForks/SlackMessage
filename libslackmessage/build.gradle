@@ -35,7 +35,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.0.0'
@@ -46,7 +45,7 @@ publish {
     userOrg = 'suhanlee'
     groupId = 'com.devsh.suhanlee'
     artifactId = 'slack-message'
-    publishVersion = '0.1.2'
+    publishVersion = '0.1.3'
     desc = 'SlackMessage Library for Android - It was inspired by Slack WebHooks API'
     website = 'https://github.com/suhanlee/SlackMessage'
     issueTracker = "${website}/issues"
